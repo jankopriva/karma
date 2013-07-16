@@ -1,0 +1,43 @@
+diff --git a/karma_logging.patch b/karma_logging.patch
+index 1e332df..e69de29 100644
+--- a/karma_logging.patch
++++ b/karma_logging.patch
+@@ -1,22 +0,0 @@
+-diff --git a/lib/reporters/Base.js b/lib/reporters/Base.js
+-index c81acca..b44a359 100644
+---- a/lib/reporters/Base.js
+-+++ b/lib/reporters/Base.js
+-@@ -1,4 +1,5 @@
+- var util = require('util');
+-+var logger = require('../logger').create('browser console');
+- 
+- var helper = require('../helper');
+- 
+-@@ -66,9 +67,9 @@ var BaseReporter = function(formatError, reportSlow, adapter) {
+-     }
+- 
+-     if (this._browsers && this._browsers.length === 1) {
+--      this.writeCommonMsg(util.format(this.LOG_SINGLE_BROWSER, type.toUpperCase(), log));
+-+      logger(util.format(this.LOG_SINGLE_BROWSER, type.toUpperCase(), log));
+-     } else {
+--      this.writeCommonMsg(util.format(this.LOG_MULTI_BROWSER, browser, type.toUpperCase(), log));
+-+      logger(util.format(this.LOG_MULTI_BROWSER, browser, type.toUpperCase(), log));
+-     }
+-   };
+- 
+diff --git a/lib/reporters/Base.js b/lib/reporters/Base.js
+index b44a359..61b3f2a 100644
+--- a/lib/reporters/Base.js
++++ b/lib/reporters/Base.js
+@@ -67,9 +67,9 @@ var BaseReporter = function(formatError, reportSlow, adapter) {
+     }
+ 
+     if (this._browsers && this._browsers.length === 1) {
+-      logger(util.format(this.LOG_SINGLE_BROWSER, type.toUpperCase(), log));
++      logger.info(util.format(this.LOG_SINGLE_BROWSER, type.toUpperCase(), log));
+     } else {
+-      logger(util.format(this.LOG_MULTI_BROWSER, browser, type.toUpperCase(), log));
++      logger.info(util.format(this.LOG_MULTI_BROWSER, browser, type.toUpperCase(), log));
+     }
+   };
+ 
